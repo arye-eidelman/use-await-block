@@ -1,21 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function usePromiseRenderer(promise) {
   const [internalPromise, setInternalPromise] = useState(promise)
-  const [state, setState] = useState("pending")
+  const [promiseCounter, setPromiseCounter] = useState(0)
+  const [state, setState] = useState(promise ? "pending" : null)
   const [value, setValue] = useState(null)
   const [error, setError] = useState(null)
 
+  useEffect(() => {
+    if (internalPromise) {
+      internalPromise.then((promiseIndex => value => {
+        if (promiseIndex === promiseCounter) {
+          setValue(value)
+          setState("fulfilled")
+        }
+      })(promiseCounter))
 
-  internalPromise.then(value => {
-    setValue(value)
-    setState("fulfilled")
-  })
-
-  internalPromise.catch(error => {
-    setError(error)
-    setState("rejected")
-  })
+      internalPromise.catch((promiseIndex => error => {
+        if (promiseIndex === promiseCounter) {
+          setError(error)
+          setState("rejected")
+        }
+      })(promiseCounter))
+    }
+  }, [internalPromise])
 
   function promiseRenderer({ pending, fulfilled, rejected }) {
     switch (state) {
@@ -27,8 +35,9 @@ export default function usePromiseRenderer(promise) {
   }
 
   function setPromise(promise) {
+    setPromiseCounter(promiseCounter + 1)
     setInternalPromise(promise)
-    setState("pending")
+    setState(promise ? "pending" : null)
     setValue(null)
     setError(null)
   }
