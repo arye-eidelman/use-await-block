@@ -1,0 +1,13 @@
+{
+  "name": "use-promise-renderer",
+  "version": "0.0.1",
+  "description": "A svelte inspired technique for rendering based on promise state.",
+  "main": "index.js",
+  "repository": "https://github.com/arye-dov-eidelman/use-promise-renderer",
+  "author": "Arye Eidelman <arye@hey.com>",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8"
+  }
+}
