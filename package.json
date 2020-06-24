@@ -1,9 +1,9 @@
 {
-  "name": "use-promise-renderer",
+  "name": "use-await-block",
   "version": "0.0.1",
-  "description": "A svelte inspired technique for rendering based on promise state.",
+  "description": "A Svelte inspired technique for rendering based on promise state.",
   "main": "index.js",
-  "repository": "https://github.com/arye-dov-eidelman/use-promise-renderer",
+  "repository": "https://github.com/arye-dov-eidelman/use-await-block",
   "author": "Arye Eidelman <arye@hey.com>",
   "license": "MIT",
   "private": false,

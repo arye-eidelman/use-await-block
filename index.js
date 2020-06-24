@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function usePromiseRenderer(promise) {
+export default function useAwaitBlock(promise) {
   const [internalPromise, setInternalPromise] = useState(promise)
   const [promiseCounter, setPromiseCounter] = useState(0)
   const [state, setState] = useState(promise ? "pending" : null)
@@ -25,7 +25,7 @@ export default function usePromiseRenderer(promise) {
     }
   }, [internalPromise])
 
-  function promiseRenderer({ pending, fulfilled, rejected }) {
+  function awaitBlock({ pending, fulfilled, rejected }) {
     switch (state) {
       case "pending": return pending ? pending() : null
       case "fulfilled": return fulfilled ? fulfilled(value) : null
@@ -42,5 +42,5 @@ export default function usePromiseRenderer(promise) {
     setError(null)
   }
 
-  return [promiseRenderer, setPromise]
+  return [awaitBlock, setPromise]
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import usePromiseRenderer from 'use-promise-renderer'
+import useAwaitBlock from 'use-await-block'
 
 function fetchPosts() {
   if (Math.random() < 0.25) {
@@ -12,7 +12,7 @@ function fetchPosts() {
 }
 
 function Posts() {
-  const [postsPromiseRenderer, setPostsPromise] = usePromiseRenderer(null)
+  const [postsAwaitBlock, setPostsPromise] = useAwaitBlock(null)
 
   function reload() {
     setPostsPromise(fetchPosts())
@@ -22,7 +22,7 @@ function Posts() {
 
   return (
     <div>
-      {postsPromiseRenderer({
+      {postsAwaitBlock({
         pending: () => <p>Loading...</p>,
         fulfilled: posts => (
           <>
