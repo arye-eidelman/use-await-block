@@ -1,5 +1,5 @@
-import React from 'react'
-import usePromiseRenderer from './index.js' // from 'use-promise-renderer'
+import React, { useEffect } from 'react'
+import usePromiseRenderer from 'use-promise-renderer'
 
 function fetchPosts() {
   if (Math.random() < 0.25) {
@@ -12,27 +12,29 @@ function fetchPosts() {
 }
 
 function Posts() {
-  const [postsPromiseRenderer, setPostsPromise] = usePromiseRenderer(fetchPosts())
+  const [postsPromiseRenderer, setPostsPromise] = usePromiseRenderer(null)
 
   function reload() {
     setPostsPromise(fetchPosts())
   }
 
+  useEffect(reload, [])
+
   return (
     <div>
       {postsPromiseRenderer({
-        pending: () => <p>Spinner here</p>,
+        pending: () => <p>Loading...</p>,
         fulfilled: posts => (
           <>
             <button onClick={reload}> Refresh </button>
             <ul>
               {posts.map(post => (
-                <li> <a href={`/posts/${post.id}`}> {post.title} </a> </li>
+                <li key={post.id}> <a href={`/posts/${post.id}`}> {post.title} </a> </li>
               ))}
             </ul>
           </>
         ),
-        rejected: error => <p> Something went wrong ({error}) <button onClick={reload}> Retry </button> </p>,
+        rejected: error => <p> Something went wrong ({error.toString()}) <button onClick={reload}> Retry </button> </p>,
       })}
     </div>
   )
