@@ -1,6 +1,6 @@
 {
   "name": "use-await-block",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Svelte inspired technique for rendering based on promise state.",
   "main": "index.js",
   "repository": "https://github.com/arye-dov-eidelman/use-await-block",
