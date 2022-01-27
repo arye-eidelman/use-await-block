@@ -4,7 +4,7 @@
   "description": "A Svelte inspired technique for rendering based on promise state.",
   "main": "index.js",
   "repository": "https://github.com/arye-dov-eidelman/use-await-block",
-  "author": "Arye Eidelman <arye@hey.com>",
+  "author": "Arye Eidelman <aryedoveidelman@gmail.com>",
   "license": "MIT",
   "private": false,
   "peerDependencies": {
